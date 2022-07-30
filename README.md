@@ -10,4 +10,4 @@ This repository is intend to show the work of how we can upload files in bulk fo
 
 <p> 2. Install Requirements.txt </p>
 
-<p> Setup Django and To access the bulk uplaoder use link <b> http:< YOUR HOST>/uplaoder/file-upload </b></p>
+<p> Setup Django and To access the bulk uplaoder use link <b> http:< YOUR HOST>/uplaoder/upload-file </b></p>
