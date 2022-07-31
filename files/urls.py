@@ -1,15 +1,21 @@
-from django.urls import path 
-from .views import UploadFiles, GetAllFiles,DownloadFiles
-from django.conf.urls.static import static
+from django.contrib import admin
+from django.urls import path, include, re_path
 from django.conf import settings
-urlpatterns = [
-    path('upload-file',UploadFiles,name='uploadfiles'),
-    path('get-all-files',GetAllFiles,name='GetAllFiles'),
+from django.conf.urls.static import static
+from django.views.generic import TemplateView
+from rest_framework_simplejwt import views as jwt_views
 
-    path('download-files/<filename>',DownloadFiles,name='DownloadFile')
+urlpatterns = [
+    path('admin/', admin.site.urls),
+    path('accounts/', include('accounts.urls')),
+    path('api/', include('api.urls')),
+    path('api-auth/', include('rest_framework.urls')),
+    path('api/token/', jwt_views.TokenObtainPairView.as_view(), name='token_obtain_pair'),
+    path('auth/', include('djoser.urls')),
+    path('auth/', include('djoser.urls.jwt')),
+    path('uplaoder/',include("files.urls"))
 ]
 
-
-# only in development
 if settings.DEBUG:
-    urlpatterns += static(settings.MEDIA_URL, document_root = settings.MEDIA_ROOT)
+    urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
+    urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
