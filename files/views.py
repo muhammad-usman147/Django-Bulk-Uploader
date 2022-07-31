@@ -1,10 +1,15 @@
 from http.client import HTTPResponse
 from msilib.schema import File
 from django.shortcuts import render, HttpResponse
+from django.http.response import  JsonResponse
 from .forms import UploadFileForm
 import os
 from .models import UserFiles
 from django.core.files.storage import FileSystemStorage
+import json 
+import boto3
+from django.utils.decorators import  method_decorator
+from django.views.decorators.csrf import csrf_exempt
 # Create your views here.
 
 def UploadFiles(request): #manually
@@ -45,4 +50,19 @@ def DownloadFiles(request,filename):
     })# content_type='application/admin-upload')
    
     return response
+
+@method_decorator(csrf_exempt,name = 'dispatch')
+def GetCred(request):
+    if request.method == 'POST':
+        data = json.loads(request.body.decode('utf-8'))
+
+        client = boto3.client(
+            's3',
+            aws_access_key_id=str(data.get('your_access_key_id')),
+            aws_secret_access_key=str(data.get('your_secret_access_key'))
+            )
+        print(client)
+        return JsonResponse({"msg":"True"})
+
+
     
