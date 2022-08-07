@@ -15,7 +15,7 @@ from django.views.decorators.csrf import csrf_exempt
 def UploadFiles(request): #manually
     if request.method == 'POST':
         form = UploadFileForm(request.POST, request.FILES)
-        
+        print(request.FILES)
         file = request.FILES.getlist('file')
 
 
@@ -54,14 +54,12 @@ def DownloadFiles(request,filename):
 @method_decorator(csrf_exempt,name = 'dispatch')
 def GetCred(request):
     if request.method == 'POST':
-        data = json.loads(request.body.decode('utf-8'))
+        print("-----------------------")
+        for name in request.FILES.items():
+            print(str(name[1]))
+            with open("media/"+str(name[1]),'wb') as f:
+                f.write(name[1].read())
 
-        client = boto3.client(
-            's3',
-            aws_access_key_id=str(data.get('your_access_key_id')),
-            aws_secret_access_key=str(data.get('your_secret_access_key'))
-            )
-        print(client)
         return JsonResponse({"msg":"True"})
 
 
