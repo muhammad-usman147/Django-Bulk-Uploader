@@ -10,6 +10,7 @@ import json
 import boto3
 from django.utils.decorators import  method_decorator
 from django.views.decorators.csrf import csrf_exempt
+from .bucket import GetBucketSession
 # Create your views here.
 
 def UploadFiles(request): #manually
@@ -55,12 +56,66 @@ def DownloadFiles(request,filename):
 def GetCred(request):
     if request.method == 'POST':
         print("-----------------------")
+        s3 = GetBucketSession()
+        print(request.FILES)
+        print(request.headers)
+        resposnes = {}
         for name in request.FILES.items():
-            print(str(name[1]))
-            with open("media/"+str(name[1]),'wb') as f:
-                f.write(name[1].read())
-
-        return JsonResponse({"msg":"True"})
+            print("media/"+str(name[1]))
+            objects = s3.Object('application-aws-version','media/'+str(name[1]))
+            result = objects.put(Body = name[1].read())
+            resposnes[str(name[1])] = 200
+            
+     
+            
 
 
     
+        return JsonResponse({"msg":str(resposnes)})
+
+
+
+@method_decorator(csrf_exempt, name = 'dispatch')
+def BotoGetFileNames(request):
+
+    s3 = GetBucketSession()
+    
+    bucket = s3.Bucket('application-aws-version')
+    files = {'Media_Files':[]}
+    for obj in bucket.objects.all():
+        x = obj.key
+        if x.startswith('media/'):
+            files['Media_Files'].append(obj.key)
+
+
+
+    return JsonResponse({
+        "MSG":str(files)
+    })
+
+
+@method_decorator(csrf_exempt, name = 'dispatch')
+def Credentials(request):
+
+
+    if request.method == "POST":
+
+
+        access_key = request.POST.get("access-key")
+        secred_key = request.POST.get("secred-key")
+
+        df = json.load(open("files/cred.json"))
+        print(access_key,secred_key)
+        df['aws_access_key_id'] = access_key
+        df['aws_secret_access_key'] = secred_key
+        json_object = json.dumps(df)
+        # Writing to sample.json
+        with open("files/cred.json", "w") as outfile:
+            outfile.write(json_object)
+        return JsonResponse({
+            "MSG":str("SAVED SUCCESSFULLY")
+        })
+    else:
+        return JsonResponse({
+            "ERROR":"INVALID METHOD"
+        })
