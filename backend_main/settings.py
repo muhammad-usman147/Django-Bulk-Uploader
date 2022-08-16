@@ -162,7 +162,10 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 # aws s3 Bucket
 # print(os.environ.get('AWS_SECRET_ACCESS_KEY'))
-
+DEFAULT_FILE_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
+AWS_ACCESS_KEY_ID = 'AKIA5IM6XOLZ2JAUDJ4S'
+AWS_SECRET_ACCESS_KEY = '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'
+AWS_STORAGE_BUCKET_NAME = 'application-aws-version'
 
 AWS_QUERYSTRING_AUTH = False
 
@@ -206,3 +209,6 @@ DJOSER = {
 }
 
 AUTH_USER_MODEL = 'accounts.UserAccount'
+
+
+DATA_UPLOAD_MAX_NUMBER_FIELDS = None

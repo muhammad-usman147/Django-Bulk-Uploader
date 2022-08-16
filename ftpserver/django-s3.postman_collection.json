@@ -1,0 +1,182 @@
+{
+	"variables": [],
+	"info": {
+		"name": "django-s3",
+		"_postman_id": "2149ea21-7977-0de5-20cd-932eba01832b",
+		"description": "",
+		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "UPLOAD FILES ",
+			"request": {
+				"url": "http://127.0.0.1:8000/uplaoder/upload-files",
+				"method": "POST",
+				"header": [
+					{
+						"key": "",
+						"value": "",
+						"description": "",
+						"disabled": true
+					}
+				],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "rehan.pdf",
+							"value": "",
+							"description": "",
+							"type": "file"
+						},
+						{
+							"key": "secred-key",
+							"value": "Naqr0G/aNNAaP9/fhI2r/u0SPgItwIhoZ08CYpWf",
+							"description": "",
+							"type": "text",
+							"disabled": true
+						}
+					]
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "GET FILES",
+			"request": {
+				"url": "http://127.0.0.1:8000/uplaoder/get-files",
+				"method": "GET",
+				"header": [
+					{
+						"key": "",
+						"value": "",
+						"description": "",
+						"disabled": true
+					}
+				],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "access-key",
+							"value": "AKIA5IM6XOLZSBR2ARR5",
+							"description": "",
+							"type": "text"
+						},
+						{
+							"key": "secred-key",
+							"value": "Naqr0G/aNNAaP9/fhI2r/u0SPgItwIhoZ08CYpWf",
+							"description": "",
+							"type": "text"
+						}
+					]
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "UPLOAD CREDENTIALS",
+			"request": {
+				"url": "http://127.0.0.1:8000/uplaoder/upload-credentials",
+				"method": "POST",
+				"header": [
+					{
+						"key": "",
+						"value": "",
+						"description": "",
+						"disabled": true
+					}
+				],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "access-key",
+							"value": "AKIA5IM6XOLZSBR2ARR5",
+							"description": "",
+							"type": "text"
+						},
+						{
+							"key": "secred-key",
+							"value": "Naqr0G/aNNAaP9/fhI2r/u0SPgItwIhoZ08CYpWf",
+							"description": "",
+							"type": "text"
+						}
+					]
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "FTP SERVER GET ALL FILES",
+			"request": {
+				"url": "http://127.0.0.1:8000/ftp/get-files",
+				"method": "GET",
+				"header": [
+					{
+						"key": "",
+						"value": "",
+						"description": "",
+						"disabled": true
+					}
+				],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "rehan.pdf",
+							"value": "",
+							"description": "",
+							"type": "file"
+						},
+						{
+							"key": "secred-key",
+							"value": "Naqr0G/aNNAaP9/fhI2r/u0SPgItwIhoZ08CYpWf",
+							"description": "",
+							"type": "text",
+							"disabled": true
+						}
+					]
+				},
+				"description": "CREATE SERVER USING FILEZILLA\nCREDS:\n\n        host = 'localhost'\n        ftport = 21\n        ftpusername = 'mahad'\n        password = 'abc123'\n        \nACCESS: READ AND WRITE"
+			},
+			"response": []
+		},
+		{
+			"name": "FTP SERVER UPLOA FILES",
+			"request": {
+				"url": "http://127.0.0.1:8000/ftp/upload-files",
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "pdf1",
+							"value": "",
+							"description": "",
+							"type": "file"
+						},
+						{
+							"key": "notebook",
+							"value": "",
+							"description": "",
+							"type": "file"
+						},
+						{
+							"key": "worddoc",
+							"value": "",
+							"description": "",
+							"type": "file"
+						}
+					]
+				},
+				"description": ""
+			},
+			"response": []
+		}
+	]
+}

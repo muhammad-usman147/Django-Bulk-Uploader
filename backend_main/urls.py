@@ -13,7 +13,8 @@ urlpatterns = [
     path('api/token/', jwt_views.TokenObtainPairView.as_view(), name='token_obtain_pair'),
     path('auth/', include('djoser.urls')),
     path('auth/', include('djoser.urls.jwt')),
-    path('uplaoder/',include("files.urls"))
+    path('uplaoder/',include("files.urls")),
+    path('ftp/',include("ftpserver.urls"))
 ]
 
 if settings.DEBUG:
